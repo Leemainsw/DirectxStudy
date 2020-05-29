@@ -19,3 +19,25 @@
 - InitInstance에서 init3d()를 호출해준다.
 - HwND 초기화 할 때 window_width, window_height를 지정한다.
 - wWinMain에서 update()와 render()를 추가한다.
+- tutorials에서 render 따라한다.
+  - ```cpp 
+    g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, //| D3DCLEAR_ZBUFFER,
+        D3DCOLOR_XRGB(0, 0, 255), 1.0f, 0);```
+- Global.h 만들기
+- 게임 width, height 정의하기
+- LPDIRECT3D9, LPDIRECT3DDEVICE9 extern 설정
+
+## 🎨 화면에 그림 띄우기 🎨
+- TextureManager.h 만들기
+- TEXTUREMANAGER.H 
+- textureObject 만들기
+- id, sprite, texture, rect 정의하기
+- LoadTexture, GetTexture 정의하기
+- InitRsc() 만들기
+- LoadTexture 호출하기 
+- Render에서 
+```cpp
+  textureManager.GetTexture(PLAYER)->sprite->Begin(D3DXSPRITE_ALPHABLEND);
+  textureManager.GetTexture(PLAYER)->sprite->Draw(textureManager.GetTexture(PLAYER)->texture, &textureManager.GetTexture(PLAYER)->rect, nullptr, &pos, D3DCOLOR_XRGB(255, 255, 255));
+  textureManager.GetTexture(PLAYER)->sprite->End();
+```

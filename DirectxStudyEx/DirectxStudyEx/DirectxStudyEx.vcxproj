@@ -152,11 +152,14 @@
   <ItemGroup>
     <ClInclude Include="DirectxStudyEx.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Texture_Manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectxStudyEx.cpp" />
+    <ClCompile Include="Texture_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectxStudyEx.rc" />

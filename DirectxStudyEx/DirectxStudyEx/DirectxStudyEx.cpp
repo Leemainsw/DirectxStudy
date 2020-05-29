@@ -3,29 +3,83 @@
 
 #include "framework.h"
 #include "DirectxStudyEx.h"
+#include "Global.h"
 
-#include <Windows.h>
-#include <d3dx9.h>
-#pragma warning( disable : 4996 ) // disable deprecated warning 
 
 #define MAX_LOADSTRING 100 
 
-#define WINDOW_WIDTH 680
-#define WIDTH_HEIGHT 480
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
-LPDIRECT3D9             g_pD3D = NULL; // Used to create the D3DDevice
-LPDIRECT3DDEVICE9       g_pd3dDevice = NULL; // Our rendering device
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+// 함수 초기화
+void Render();
+void Update();
+void InitRsc();
+HRESULT InitD3D(HWND hWnd);
+
+// 변수 초기화
+LPDIRECT3D9 g_pD3D = nullptr;
+LPDIRECT3DDEVICE9 g_pd3dDevice = nullptr;
+Texture_Manager textureManager;
+
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
+{
+    UNREFERENCED_PARAMETER(hPrevInstance);
+    UNREFERENCED_PARAMETER(lpCmdLine);
+
+    // TODO: 여기에 코드를 입력합니다.
+
+    // 전역 문자열을 초기화합니다.
+    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_DIRECTXSTUDYEX, szWindowClass, MAX_LOADSTRING);
+    MyRegisterClass(hInstance);
+
+    // 애플리케이션 초기화를 수행합니다:
+    if (!InitInstance(hInstance, nCmdShow))
+    {
+        return FALSE;
+    }
+
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DIRECTXSTUDYEX));
+
+    // 기본 메시지 루프입니다:
+    MSG msg;
+    ZeroMemory(&msg, sizeof(msg));
+    while (msg.message != WM_QUIT)
+    {
+        if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+        else
+        {
+            Update();
+            Render();
+        }
+
+    }
+
+    return (int)msg.wParam;
+}
+
+void InitRsc() 
+{
+    textureManager.LoadTexture(L"Player.png", PLAYER, 0, 600, 0, 600);
+}
 
 void Update()
 {
@@ -35,12 +89,22 @@ void Update()
 void Render() 
 {
     // Clear the backbuffer and the zbuffer
-    g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-        D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
+    g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, //| D3DCLEAR_ZBUFFER,
+        D3DCOLOR_XRGB(0, 0, 255), 1.0f, 0);
 
     // Begin the scene
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
+        D3DXVECTOR3 pos(0, 0, 0);
+
+        textureManager.GetTexture(PLAYER)->sprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+        textureManager.GetTexture(PLAYER)->sprite->Draw(textureManager.GetTexture(PLAYER)->texture, &textureManager.GetTexture(PLAYER)->rect, nullptr, &pos,
+            D3DCOLOR_XRGB(255, 255, 255));
+
+
+        textureManager.GetTexture(PLAYER)->sprite->End();
+
 
         // End the scene
         g_pd3dDevice->EndScene();
@@ -73,49 +137,7 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK;
 }
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
-{
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: 여기에 코드를 입력합니다.
-
-    // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_DIRECTXSTUDYEX, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
-
-    // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance (hInstance, nCmdShow))
-    {
-        return FALSE;
-    }
-
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DIRECTXSTUDYEX));
-
-    // 기본 메시지 루프입니다:
-    MSG msg;
-    ZeroMemory(&msg, sizeof(msg));
-    while (msg.message != WM_QUIT)
-    {
-        if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-        else 
-        {
-            Update();
-            Render();
-        }
-            
-    }
-
-    return (int) msg.wParam;
-}
 
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
@@ -131,7 +153,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_DIRECTXSTUDYEX));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = nullptr; //MAKEINTRESOURCEW(IDC_DIRECTXSTUDYEX);
+    wcex.lpszMenuName   = nullptr; // MAKEINTRESOURCEW(IDC_DIRECTXSTUDYEX);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -151,6 +173,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
    
    InitD3D(hWnd);
+   InitRsc();
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
