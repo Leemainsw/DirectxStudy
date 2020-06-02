@@ -41,3 +41,44 @@
   textureManager.GetTexture(PLAYER)->sprite->Draw(textureManager.GetTexture(PLAYER)->texture, &textureManager.GetTexture(PLAYER)->rect, nullptr, &pos, D3DCOLOR_XRGB(255, 255, 255));
   textureManager.GetTexture(PLAYER)->sprite->End();
 ```
+
+## ⏰ DeltaTime 적용하기 ⏰
+- 자료형은 DWORD
+- prevTime 선언
+- GetTickCount(); prevTime에 적용 (initstuff에서)
+- Update 할 때마다
+```cpp
+  DWORD cur = GetTickCount();    
+    DWORD diff = cur - prevTime;
+    deltaTime = diff / (1000.0f);
+
+    if (deltaTime > 0.016)
+    {
+        deltaTime = 0.016f;
+    }
+
+    prevTime = cur;
+```
+- deltaTime은 extern으로 global에 정의
+
+## ⏰ Stage 나누기 ⏰
+- stageManager 생성
+- stage 생성
+- make titlestage() 
+- make gamestage()
+- make update(), render()
+
+**stageManager** 
+- currentStage 
+- update
+- render
+
+**TitleStage**
+- Update 
+  - 마우스 클릭했을 때 GameStage로 넘어가기
+- Render
+  - texture 가져와서 찍기
+
+**GameStage**
+- Update
+- Render

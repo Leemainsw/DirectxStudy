@@ -1,10 +1,10 @@
 #pragma once
-
-#include "Global.h"
 #include <vector>
+
 using namespace std;
 
-class TextureObject {
+class TextureObject 
+{
 public:
 	int id;
 	LPD3DXSPRITE sprite;

@@ -5,9 +5,7 @@
 #include "DirectxStudyEx.h"
 #include "Global.h"
 
-
 #define MAX_LOADSTRING 100 
-
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
@@ -30,7 +28,13 @@ HRESULT InitD3D(HWND hWnd);
 // 변수 초기화
 LPDIRECT3D9 g_pD3D = nullptr;
 LPDIRECT3DDEVICE9 g_pd3dDevice = nullptr;
+
+DWORD prevTime;
+DWORD deltaTime;
+
 Texture_Manager textureManager;
+Stage_Manager stageManager;
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -78,16 +82,42 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 void InitRsc() 
 {
-    textureManager.LoadTexture(L"Player.png", PLAYER, 0, 600, 0, 600);
+    //textureManager.LoadTexture(L"texture.png", 1);
+    textureManager.LoadTexture(L"title.png", TEX_TITLE_SCREEN, 0,  680, 0, 480);
+    //textureManager.LoadTexture(L"background.png", GAME_BACKGROUND, 0, width, 0, height);
+    //textureManager.LoadTexture(L"player1.png", GAME_PLAYER_BODY, 0, width, 0, height);
+    //textureManager.LoadTexture(L"player_bullet_1.png", GAME_PLAYER_BULLET_1, 0, width, 0, height);
+
+    //textureManager.LoadTexture(L"enemy_a.png", GAME_ENEMY_A_BODY, 0, width, 0, height);
+    //textureManager.LoadTexture(L"enemy_b.png", GAME_ENEMY_B_BODY, 0, width, 0, height);
+
+    //textureManager.LoadTexture(L"explosion.png", GAME_ENEMY_EXPLOSION, 0, width, 0, height);
+
+    //textureManager.LoadTexture(L"boss_a.png", GAME_ENEMY_BOSS_A_BODY, 0, width, 0, height);
+    //textureManager.LoadTexture(L"boss_bullt_a.png", GAME_ENEMY_BOSS_A_BULLET_1, 0, width, 0, height);
+
+    stageManager.MakeTitleStage();
+    prevTime = GetTickCount();
 }
 
 void Update()
 {
+    stageManager.Update();
+    DWORD current = GetTickCount();
+    DWORD diff = current - prevTime;
+    deltaTime = diff / (1000.f);
 
+    if (deltaTime > 0.016)
+    {
+        deltaTime = 0.016f;
+    }
+
+    prevTime = current;
 }
 
 void Render() 
 {
+   
     // Clear the backbuffer and the zbuffer
     g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, //| D3DCLEAR_ZBUFFER,
         D3DCOLOR_XRGB(0, 0, 255), 1.0f, 0);
@@ -95,15 +125,17 @@ void Render()
     // Begin the scene
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
+        stageManager.Render();
+
         D3DXVECTOR3 pos(0, 0, 0);
 
-        textureManager.GetTexture(PLAYER)->sprite->Begin(D3DXSPRITE_ALPHABLEND);
+       /* textureManager.GetTexture(PLAYER)->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
         textureManager.GetTexture(PLAYER)->sprite->Draw(textureManager.GetTexture(PLAYER)->texture, &textureManager.GetTexture(PLAYER)->rect, nullptr, &pos,
             D3DCOLOR_XRGB(255, 255, 255));
 
 
-        textureManager.GetTexture(PLAYER)->sprite->End();
+        textureManager.GetTexture(PLAYER)->sprite->End();*/
 
 
         // End the scene
@@ -136,8 +168,6 @@ HRESULT InitD3D(HWND hWnd)
 
     return S_OK;
 }
-
-
 
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {

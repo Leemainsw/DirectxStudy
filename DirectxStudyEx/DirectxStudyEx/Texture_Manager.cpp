@@ -1,7 +1,6 @@
-#include "Texture_Manager.h"
 #include "Global.h"
 
-void Texture_Manager::LoadTexture(const TCHAR* name, int id, int left, int right, int top, int bottom) {
+void Texture_Manager::LoadTexture(const TCHAR* name, int id, int left, int width, int top, int height) {
 	TextureObject* newObject = new TextureObject;
 	
 	//id setting
@@ -14,9 +13,9 @@ void Texture_Manager::LoadTexture(const TCHAR* name, int id, int left, int right
 	D3DXCreateSprite(g_pd3dDevice, &newObject->sprite);
 
 	newObject->rect.top = top;
-	newObject->rect.bottom = bottom;
+	newObject->rect.bottom = height;
 	newObject->rect.left = left;
-	newObject->rect.right = right;
+	newObject->rect.right = width;
 
 
 	textureObjects.push_back(newObject);

@@ -33,12 +33,24 @@
     <ClInclude Include="Texture_Manager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Stage_Manager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleStage.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectxStudyEx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Texture_Manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_Manager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleStage.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

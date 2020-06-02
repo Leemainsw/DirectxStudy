@@ -154,12 +154,16 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Stage_Manager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture_Manager.h" />
+    <ClInclude Include="TitleStage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectxStudyEx.cpp" />
+    <ClCompile Include="Stage_Manager.cpp" />
     <ClCompile Include="Texture_Manager.cpp" />
+    <ClCompile Include="TitleStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectxStudyEx.rc" />
