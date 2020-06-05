@@ -13,7 +13,7 @@ void TitleStage::Update()
 
 void TitleStage::Render()
 {
-	TextureObject* object = textureManager.GetTexture(GAME_BACKGROUND);
+	TextureObject* object = textureManager.GetTexture(TEX_TITLE_SCREEN);
 	object->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	D3DXVECTOR3 pos(0, 0, 0);

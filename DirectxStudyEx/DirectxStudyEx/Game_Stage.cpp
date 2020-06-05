@@ -4,7 +4,6 @@
 void Game_Stage::Update()
 {
 
-
 }
 
 void Game_Stage::Render()

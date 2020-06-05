@@ -5,7 +5,7 @@
 class TitleStage : public Stage
 {
 public:
-	void Update();
-	void Render();
+	void Update() override;
+	void Render() override;
 };
 

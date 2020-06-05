@@ -90,4 +90,4 @@
 - global.h에 넣기
 - prevKeyBuffer[256], keyBuffer[256]
 - update() 함수에서 prevKeyBuffer[i] = keyBuffer[i];
-- 
+- CALLBACK WndProc 에서 LButtonDown, LButtonUp 일 경우 코드 작성하기 
