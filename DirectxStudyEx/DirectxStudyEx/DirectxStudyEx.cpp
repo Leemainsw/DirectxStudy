@@ -34,6 +34,7 @@ DWORD deltaTime;
 
 Texture_Manager textureManager;
 Stage_Manager stageManager;
+Input_Manager inputManager;
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -84,7 +85,7 @@ void InitRsc()
 {
     //textureManager.LoadTexture(L"texture.png", 1);
     textureManager.LoadTexture(L"title.png", TEX_TITLE_SCREEN, 0,  680, 0, 480);
-    //textureManager.LoadTexture(L"background.png", GAME_BACKGROUND, 0, width, 0, height);
+    textureManager.LoadTexture(L"background.png", GAME_BACKGROUND, 0, 640, 0, 680);
     //textureManager.LoadTexture(L"player1.png", GAME_PLAYER_BODY, 0, width, 0, height);
     //textureManager.LoadTexture(L"player_bullet_1.png", GAME_PLAYER_BULLET_1, 0, width, 0, height);
 
@@ -102,7 +103,6 @@ void InitRsc()
 
 void Update()
 {
-    stageManager.Update();
     DWORD current = GetTickCount();
     DWORD diff = current - prevTime;
     deltaTime = diff / (1000.f);
@@ -113,6 +113,9 @@ void Update()
     }
 
     prevTime = current;
+
+    stageManager.Update();
+    inputManager.Update();
 }
 
 void Render() 

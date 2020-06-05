@@ -82,3 +82,12 @@
 **GameStage**
 - Update
 - Render
+
+## ✒ 입력 메니저 ✒
+
+**InpuyManager**
+- Input_Manager.h 파일 생성 (cpp제외)
+- global.h에 넣기
+- prevKeyBuffer[256], keyBuffer[256]
+- update() 함수에서 prevKeyBuffer[i] = keyBuffer[i];
+- 

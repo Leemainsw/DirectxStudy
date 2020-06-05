@@ -7,6 +7,8 @@
 #include "Texture_Manager.h"
 #include "TitleStage.h"
 #include "Stage_Manager.h"
+#include "Input_Manager.h"
+#include "Game_Stage.h"
 
 #pragma warning( disable : 4996 ) // disable deprecated warning 
 
@@ -31,8 +33,12 @@
 
 extern LPDIRECT3D9             g_pD3D; // Used to create the D3DDevice
 extern LPDIRECT3DDEVICE9       g_pd3dDevice; // Our rendering device
-extern DWORD deltaTime;
+
+extern DWORD deltaTime;;
 
 extern Texture_Manager textureManager;
-extern TitleStage titleStage;
 extern Stage_Manager stageManager;
+extern Input_Manager inputManager;
+
+extern Game_Stage gameStage;
+extern TitleStage titleStage;

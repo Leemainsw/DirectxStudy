@@ -152,7 +152,9 @@
   <ItemGroup>
     <ClInclude Include="DirectxStudyEx.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Game_Stage.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Input_Manager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Stage_Manager.h" />
     <ClInclude Include="targetver.h" />
@@ -161,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectxStudyEx.cpp" />
+    <ClCompile Include="Game_Stage.cpp" />
     <ClCompile Include="Stage_Manager.cpp" />
     <ClCompile Include="Texture_Manager.cpp" />
     <ClCompile Include="TitleStage.cpp" />
