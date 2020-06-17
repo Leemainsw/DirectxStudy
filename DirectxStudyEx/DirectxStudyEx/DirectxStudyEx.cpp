@@ -35,6 +35,7 @@ DWORD deltaTime;
 Texture_Manager textureManager;
 Stage_Manager stageManager;
 Input_Manager inputManager;
+GameSystem gameSystem;
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -84,12 +85,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 void InitRsc() 
 {
     //textureManager.LoadTexture(L"texture.png", 1);
-    textureManager.LoadTexture(L"title.png", TEX_TITLE_SCREEN, 0,  680, 0, 480);
+    textureManager.LoadTexture(L"title.png", TEX_TITLE_SCREEN, 0, 640, 0, 480);
     textureManager.LoadTexture(L"background.png", GAME_BACKGROUND, 0, 640, 0, 680);
-    //textureManager.LoadTexture(L"player1.png", GAME_PLAYER_BODY, 0, width, 0, height);
-    //textureManager.LoadTexture(L"player_bullet_1.png", GAME_PLAYER_BULLET_1, 0, width, 0, height);
+    textureManager.LoadTexture(L"player1.png", GAME_PLAYER_BODY, 0, 31, 0, 48);
+    textureManager.LoadTexture(L"player_bullet_1.png", GAME_PLAYER_BULLET_1, 0, 11, 0, 11);
 
-    //textureManager.LoadTexture(L"enemy_a.png", GAME_ENEMY_A_BODY, 0, width, 0, height);
+    textureManager.LoadTexture(L"enemy_a.png", GAME_ENEMY_A_BODY, 0, 40, 0, 70 );
     //textureManager.LoadTexture(L"enemy_b.png", GAME_ENEMY_B_BODY, 0, width, 0, height);
 
     //textureManager.LoadTexture(L"explosion.png", GAME_ENEMY_EXPLOSION, 0, width, 0, height);
@@ -198,7 +199,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, WINDOW_WIDTH, WIDTH_HEIGHT, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, WINDOW_WIDTH, WINDOW_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -234,6 +235,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     
     case WM_LBUTTONUP :
         inputManager.keyBuffer[VK_LBUTTON] = 0;
+        break;
+
+    case WM_KEYDOWN :
+        inputManager.keyBuffer[wParam] = 1;
+        break;
+
+    case WM_KEYUP :
+        inputManager.keyBuffer[wParam] = 0;
         break;
 
     case WM_DESTROY:

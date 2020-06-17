@@ -9,11 +9,14 @@
 #include "Stage_Manager.h"
 #include "Input_Manager.h"
 #include "Game_Stage.h"
+#include "GameSystem.h"
+#include "Enemy.h"
+#include "EnemyA.h"
 
 #pragma warning( disable : 4996 ) // disable deprecated warning 
 
-#define WINDOW_WIDTH 680
-#define WIDTH_HEIGHT 480
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
 
 #define TEX_TITLE_SCREEN 1000
 
@@ -42,3 +45,4 @@ extern Input_Manager inputManager;
 
 extern Game_Stage gameStage;
 extern TitleStage titleStage;
+extern GameSystem gameSystem;

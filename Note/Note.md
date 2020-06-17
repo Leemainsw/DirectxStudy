@@ -91,3 +91,43 @@
 - prevKeyBuffer[256], keyBuffer[256]
 - update() 함수에서 prevKeyBuffer[i] = keyBuffer[i];
 - CALLBACK WndProc 에서 LButtonDown, LButtonUp 일 경우 코드 작성하기 
+
+## 😊 Player 만들기 😊
+1. player.h 만들기  
+   **method**
+   - 생성자
+   - Update() Render()
+   - GetPosition()
+   - GetRadius() -> 이건 충돌처리할 떄
+
+  **매개변수**
+  - PlayerX
+  - PlayerYㄴ
+  - speed
+  - hp
+
+2. player.cpp 만들기
+	**초기 설정**
+	- playerX = 640 / 2;
+	- playerY = 480 * 0.8f;
+	- speed = 300;
+	- hp = 3;
+  **Update**
+  - 키보드 입력 Update해주기 
+  - ex) playerX += speed * deltaTime;
+  - 화면 밖 나감 처리해주기
+  - CALLBACK WndProc 에서 KEY_DOWN, KEY_UP 일 경우 코드 작성하기 
+
+3. Background.h 만들기
+  **초기 설정**
+  - 생성자
+  - backgroundY
+  - update(), render()
+
+4. gameSystem
+  1. Enemy 만들기
+    **초기설정**
+    - Update, Render, IsDead, GetRadius, GetPosition, SetDead, Hit 만들기
+  2. Enemy1 만들기
+    **초기설정**
+    - 
