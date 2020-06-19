@@ -23,6 +23,11 @@ void GameSystem::GenerateEnemyA()
 
 void GameSystem::Update()
 {
+	if (rand() % 100 < 5)
+	{
+		GenerateEnemyA();
+	}
+
 	// 플레이어 총알 업데이트
 	for (auto iter = bullets.begin(); iter != bullets.end();)
 	{
@@ -38,6 +43,7 @@ void GameSystem::Update()
 		}
 	}
 
+	//적 업데이트
 	for (auto iter = enemies.begin(); iter != enemies.end();)
 	{
 		(*iter)->Update();

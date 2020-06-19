@@ -18,7 +18,8 @@ EnemyA::EnemyA()
 
 void EnemyA::Update()
 {
-	switch(state)
+
+	switch (state)
 	{
 	case kInit:
 		state = kMoveToPoint;
@@ -33,13 +34,13 @@ void EnemyA::Update()
 	case kMoveToFinish:
 		UpdateMoveToFinish();
 		break;
+
 	default:
 		break;
 	}
 
 	posX += velX * deltaTime;
 	posY += velY * deltaTime;
-
 }
 
 void EnemyA::Render()
@@ -47,7 +48,8 @@ void EnemyA::Render()
 	TextureObject* object = textureManager.GetTexture(GAME_ENEMY_A_BODY);
 	object->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-	D3DXVECTOR3 pos(posX - 20, posY - 35, 0);
+	//D3DXVECTOR3 pos(posX - 20, posY - 35, 0);
+	D3DXVECTOR3 pos(posX, posY, 0);
 
 	object->sprite->Draw(object->texture, &object->rect, nullptr, &pos,
 		D3DCOLOR_XRGB(255, 255, 255));
@@ -62,7 +64,7 @@ void EnemyA::SetDead(bool flag)
 
 bool EnemyA::IsDead()
 {
-	return false;
+	return isDead;
 }
 
 void EnemyA::Hit(float damage)
@@ -77,7 +79,7 @@ float EnemyA::GetRadius()
 
 D3DXVECTOR2 EnemyA::GetPosition()
 {
-	return D3DXVECTOR2();
+	return D3DXVECTOR2(posX, posY);
 }
 
 void EnemyA::UpdateMoveToPoint()
@@ -101,6 +103,8 @@ void EnemyA::UpdateChooseDirection()
 		velX = 80 + rand() % 200;
 		velY *= 3;
 	}
+
+	state = kMoveToFinish;
 }
 
 void EnemyA::UpdateMoveToFinish()
