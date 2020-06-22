@@ -131,3 +131,23 @@
   2. Enemy1 만들기
     **초기설정**
     - 
+1. 속성에서 include, lib, 작업디렉토리 , 추가 종속성 설정
+2. 메인 코드 초기설정 + ( 전체화면 되는지 확인 )
+3. textureManager
+4. inputManager
+5. Stage + StageManager
+6. TitleStage / GameFirstStage / GameSecondStage / GameOverStage
+7. TitleStage Update
+8. GameFirstStage
+
+9. Font
+10. ENEMY + PLAYER ( 리소스 나오는지 ) 
+11. Player bullet type a, b 만들기
+12. 충돌처리
+bool isCollided(float ax, float 
+13. 방사형
+float deltaAngle = (i*8+70)
+14. 기본형
+15. animation
+16. file 입출력
+17. 아이템 + 여러가지 사항들..
