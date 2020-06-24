@@ -1,5 +1,9 @@
-﻿  EnemyA.cpp
+﻿  DirectxStudyEx.cpp
+D:\git\Mirim\DirectX_Study\DirectxStudyEx\DirectxStudyEx\DirectxStudyEx.cpp(109,22): warning C4244: '=': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Mirim\DirectX_Study\DirectxStudyEx\DirectxStudyEx\DirectxStudyEx.cpp(113,21): warning C4244: '=': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EnemyA.cpp
 D:\git\Mirim\DirectX_Study\DirectxStudyEx\DirectxStudyEx\EnemyA.cpp(12,17): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\git\Mirim\DirectX_Study\DirectxStudyEx\DirectxStudyEx\EnemyA.cpp(98,10): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\git\Mirim\DirectX_Study\DirectxStudyEx\DirectxStudyEx\EnemyA.cpp(103,13): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   DirectxStudyEx.vcxproj -> D:\git\Mirim\DirectX_Study\DirectxStudyEx\Debug\DirectxStudyEx.exe
