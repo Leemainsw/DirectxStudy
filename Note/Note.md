@@ -114,6 +114,7 @@
 	- hp = 3;
   **Update**
   - 키보드 입력 Update해주기 
+  - 
   - ex) playerX += speed * deltaTime;
   - 화면 밖 나감 처리해주기
   - CALLBACK WndProc 에서 KEY_DOWN, KEY_UP 일 경우 코드 작성하기 
